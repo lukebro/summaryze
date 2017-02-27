@@ -28,21 +28,6 @@
 			@endforeach
 		@endif
 
-		@if (false)
-			<h3 class="title is-3" style="margin-top: 5rem;">Excerpts</h3>
-			<div class="columns is-multiline">
-			@foreach(collect($summary->excerpts)->unique()->values()->all() as $excerpt)
-			<div class="column is-one-third">
-			<div class="card">
-				<div class="card-content">
-					{{ $excerpt }}
-				</div>
-			</div>
-			</div>
-			@endforeach
-			</div>
-		@endif
-
 		@if ($summary->excerpts)
 			@php
 				$excerpts = collect($summary->excerpts)->unique()->split(3);
@@ -52,7 +37,7 @@
 				@for ($i = 0; $i < 3; $i++)
 				<div class="column is-one-third">
 					@foreach ($excerpts[$i] as $excerpt)
-						@if (trim($excerpt) != null)
+						@if (trim($excerpt) != null && strpos($excerpt, '.') !== false)
 							<div class="card" style="margin-bottom: 1.5rem;">
 								<div class="card-content">
 									{{ trim($excerpt) }}
